@@ -46,7 +46,7 @@ cas_comunicator=0 #SAS Viya Servers only
 sas_event_stream_manager=2552 #ESP servers only
 sas_infraestructure_data="5430–5439"
 default_sas_message_broker=5672
-svi_sas_config="8300–8309,8500,8501" # SAS Viya Servers only
+svi_sas_config=("8300–8309" 8500 8501) # SAS Viya Servers only
 default_sas_message_broker=15672 # SAS Viya Servers only
 sas_model_manager_launcher_context="18201–18250" # SAS Viya Servers only
 sas_job_execution_launcher_context="18501–18600" # SAS Viya Servers only
@@ -106,8 +106,8 @@ do
     echo "PORT $key ${ARR[${key}]}"
     for i in ${ARR[${key}]}
     do
-        sudo firewall-cmd --add-port=$i/tcp
-        nc -v -z localhost  $i
+         firewall-cmd --add-port=$i/tcp
+         nc -v -z localhost  $i
     done
 done
 
