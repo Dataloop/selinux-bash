@@ -1,6 +1,6 @@
 #!/bin/bash
 re='^[0-9]+$'
-if [ $# -lt 1 ] || [[ "$1" != .*"-".* ]]
+if [ $# -lt 1 ]
 then
     echo "Not enough arguments supplied. Use --help or -h for usage"
     return 126
