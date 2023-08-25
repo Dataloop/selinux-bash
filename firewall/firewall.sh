@@ -73,10 +73,11 @@ ARR["cas_monitor"]=${cas_monitor[@]}
 ARR["sas_conect_spawner_manager"]=${sas_conect_spawner_manager[@]}
 ARR["cas_comunicator"]=${cas_comunicator[@]}
 ARR["sas_event_stream_manager"]=${sas_event_stream_manager[@]}
+ARR["sas_message_broker"]=${sas_message_broker[@]}
 ARR["default_sas_message_broker"]=${default_sas_message_broker[@]}
 ARR["sas_visual_forecasting_launcher_context"]=${sas_visual_forecasting_launcher_context[@]}
 ARR["sas_cloud_analytics_services"]=${sas_cloud_analytics_services[@]}
-
+ARR["svi_sas_config"]=${svi_sas_config[@]} # SAS Viya Servers only
 
 for key in ${!ARR[@]};
 do
