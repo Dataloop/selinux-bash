@@ -1,18 +1,19 @@
 #!/bin/bash
+
 re='^[0-9]+$'
 if [ $# -lt 1 ]
 then
     echo "Not enough arguments supplied. Use --help or -h for usage"
     return 126
 fi
-if [ "$1" = "--help" ] || [[ "$1" =~ .*"h".* ]]
+if [ "$1" = "--help" ] || [ "$1" =~ .*"h".* ]
 then
     echo "This script opens ports and checks if you can reach ports
 
           check_ports.sh -[options]
         Examples:
-            check_ports.sh -cf archive.tar # adds viya ports and checks if they can be reached.
-            check_ports.sh -c archive.tar  # checks if svi ports can be reached.
+            check_ports.sh -f # adds viya ports and checks if they can be reached.
+            check_ports.sh -fp # adds ports and makes them persistent.
 
           options:
           -f: adds port rule to firewall
