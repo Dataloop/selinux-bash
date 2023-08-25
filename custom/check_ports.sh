@@ -49,7 +49,7 @@ then
         for i in ${VIYA_PORTS[@]};
         do
             echo "PORT $i"
-            firewall-cmd --add-port=$PORT/tcp
+            firewall-cmd --add-port=${PORT}_t/tcp
             nc -v -z $HOST  $i
         done
     fi
@@ -60,7 +60,7 @@ then
         for i in ${WORKSTATION_PORTS[@]};
         do
             echo "PORT $i"
-            firewall-cmd --add-port=$PORT/tcp
+            firewall-cmd --add-port=${PORT}_t/tcp
             nc -v -z $HOST  $i
         done
     fi
@@ -71,7 +71,7 @@ then
         for i in ${SAS9_PORTS[@]};
         do
             echo "PORT $i"
-            firewall-cmd --add-port=$PORT/tcp
+            firewall-cmd --add-port=${PORT}_t/tcp
             nc -v -z $HOST  $i
         done
     fi
@@ -82,7 +82,7 @@ then
         for i in ${TCP_PROTOCOL[@]};
         do
             echo "PORT $i"
-            firewall-cmd --add-port=$PORT/tcp
+            firewall-cmd --add-port=${PORT}_t/tcp
             nc -v -z $HOST  $i
         done
     fi

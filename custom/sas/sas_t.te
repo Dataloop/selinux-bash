@@ -1,0 +1,32 @@
+policy_module(sas, 0.7.1)
+
+<!--######################################
+-->
+#
+#
+
+type sas_t;
+domain_type(sas_t)
+
+type sas_exec_t;
+domain_entry_file(sas_t,sas_exec_t)
+
+type sas_var_lib_t;
+files_type(sas_var_lib_t)
+
+<!--######################################
+-->
+#
+#
+
+ifdef(<code>targeted_policy',</code>
+
+allow sas_t self:process { execheap execmem };
+unconfined_domain_noaudit(sas_t)
+role system_r types sas_t;
+
+allow sas_t sas_var_lib_t:file execmod;
+
+sas_domtrans(unconfined_t)
+
+')

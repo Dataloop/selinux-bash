@@ -1,0 +1,85 @@
+<!-- <summary>Build packages in a chroot environment.</summary>
+-->
+
+<!--######################################
+-->
+<!-- <summary>
+-->
+<!--      Execute the sas program in the sas domain.
+-->
+<!-- </summary>
+-->
+<!-- <param name="domain">
+-->
+<!--      <summary>
+-->
+<!--      Domain allowed access.
+-->
+<!--      </summary>
+-->
+<!-- </param>
+-->
+#
+interface(<code>sas_domtrans',</code>
+gen_require(<code>
+type sas_t, sas_exec_t;
+')
+
+corecmd_search_bin($1)
+domain_auto_trans($1, sas_exec_t, sas_t)
+
+allow $1 sas_t:fd use;
+allow sas_t $1:fd use;
+allow sas_t $1:fifo_file rw_file_perms;
+allow sas_t $1:process sigchld;
+')
+
+<!--######################################
+-->
+<!-- <summary>
+-->
+<!--      Create objects in the /var/lib/sas directory
+-->
+<!-- </summary>
+-->
+<!-- <param name="domain">
+-->
+<!--      <summary>
+-->
+<!--      Domain allowed access.
+-->
+<!--      </summary>
+-->
+<!-- </param>
+-->
+<!-- <param name="file_type">
+-->
+<!--      <summary>
+-->
+<!--      The type of the object to be created
+-->
+<!--      </summary>
+-->
+<!-- </param>
+-->
+<!-- <param name="object_class">
+-->
+<!--      <summary>
+-->
+<!--      The object class.
+-->
+<!--      </summary>
+-->
+<!-- </param>
+-->
+#
+interface(<code>files_var_lib_sas_filetrans',</code>
+gen_require(<code>
+type var_t, var_lib_t, sas_var_lib_t;
+')
+
+allow $1 var_t:dir search_dir_perms;
+allow $1 var_lib_t:dir search_dir_perms;
+allow $1 sas_var_lib_t:dir rw_dir_perms;
+type_transition $1 sas_var_lib_t:$3 $2;
+')

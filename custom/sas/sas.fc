@@ -1,0 +1,2 @@
+/usr/bin/sas                   --      gen_context(system_u:object_r:sas_exec_t,s0)
+/var/lib/sas(/.*)?                     gen_context(system_u:object_r:sas_var_lib_t,s0)
