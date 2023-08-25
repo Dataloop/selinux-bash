@@ -96,8 +96,8 @@ do
     done
 done
 
-echo "${ARR['svi_sas_config']} UDP"
-for i in ${ARR[${key}]}
+echo "${ARR[svi_sas_config]} UDP"
+for i in ${ARR[svi_sas_config]}
 do
     echo "${i}"
     if [[ "$1" =~ .*"f".* ]]
