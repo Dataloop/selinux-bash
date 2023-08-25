@@ -116,7 +116,7 @@ do
     do
         if [[ "$1" =~ .*"f".* ]]
         then
-            firewall-cmd --add-port=$i/tcp
+            sudo firewall-cmd --add-port=$i/tcp
         fi
         if [[ "$1" =~ .*"n".* ]]
         then
