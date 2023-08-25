@@ -1,11 +1,11 @@
 #!/bin/bash
 re='^[0-9]+$'
-if [ $# -lt 1 ]
+if [ $# -lt 1 ] || [[ "$1" != .*"-".* ]]
 then
     echo "Not enough arguments supplied. Use --help or -h for usage"
     return 126
 fi
-if [ "$1" = "-h" ] || [ "$1" = "--help" ] || [case "h" in *"$1"*]
+if [ "$1" = "-h" ] || [ "$1" = "--help" ] || [[ "$1" =~ .*"h".* ]]
 then
     echo "This script opens ports and checks if you can reach ports
 
