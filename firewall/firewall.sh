@@ -5,13 +5,21 @@ then
     echo "Not enough arguments supplied. Use --help or -h for usage"
     return 126
 fi
-if [ "$1" = "-h" ] || [ "$1" = "--help" ] || [[ "$1" =~ .*"h".* ]]
+if [ "$1" = "--help" ] || [[ "$1" =~ .*"h".* ]]
 then
     echo "This script opens ports and checks if you can reach ports
 
-          check_ports.sh -<options> parameter
+          check_ports.sh -[options] <parameter>
+        Examples:
+            check_ports.sh -cf archive.tar viya  # adds viya ports and checks if they can be reached.
+            check_ports.sh -c archive.tar viya  # checks if svi ports can be reached.
 
-          parameters:
+          options:
+          -f: adds port rule to firewall
+          -c: checks if port is in usage with nc
+          -p: makes port adding persistent
+
+          parameter:
             svi: opens svi ports
             viya: opens viya ports
     "
@@ -106,8 +114,14 @@ do
     echo "PORT $key ${ARR[${key}]}"
     for i in ${ARR[${key}]}
     do
-         firewall-cmd --add-port=$i/tcp
-         nc -v -z localhost  $i
+        if [[ "$1" =~ .*"f".* ]]
+        then
+            firewall-cmd --add-port=$i/tcp
+        fi
+        if [[ "$1" =~ .*"n".* ]]
+        then
+            nc -v -z localhost  $i
+        fi
     done
 done
 
