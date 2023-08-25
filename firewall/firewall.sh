@@ -17,7 +17,7 @@ then
           options:
           -f: adds port rule to firewall
           -c: checks if port is in usage with nc
-          -p: makes port adding persistent
+          -p: makes port adding persistent bry running firewall-cmd --runtime-to-permanent
 
           parameter:
             svi: opens svi ports
@@ -120,11 +120,16 @@ do
         then
             sudo firewall-cmd --add-port=$i/tcp
         fi
-        if [[ "$1" =~ .*"n".* ]]
+        if [[ "$1" =~ .*"c".* ]]
         then
             nc -v -z localhost  $i
         fi
     done
 done
+
+if [[ "$1" =~ .*"p".* ]]
+then
+    sudo firewall-cmd --runtime-to-permanent
+fi
 
 unset ARR
