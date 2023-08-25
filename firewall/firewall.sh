@@ -42,24 +42,24 @@ sas_cache_locator=10334 #SAS Viya Servers only
 sas_cache=4443 #SAS Viya Servers only
 sas_conect_spawner_manager=17541 #SAS Viya servers, SAS 9.X servers, workstation
 sas_conect_spawner=17551 #SAS Viya servers, SAS 9.X servers, workstation
-sas_data_server="5430-5439" #SAS Viya servers only
-sas_planning="5440-5449" #SAS Viya servers only
-sas_model_iot_launcher="18201-18250" #SAS Viya servers only
-sas_job_launcher="18501-18600" #SAS Viya servers only
-sas_forecasting_iot_launcher="18601-19000" #SAS Viya servers only
+sas_data_server=("5430-5439") #SAS Viya servers only
+sas_planning=("5440-5449") #SAS Viya servers only
+sas_model_iot_launcher=("18201-18250") #SAS Viya servers only
+sas_job_launcher=("18501-18600") #SAS Viya servers only
+sas_forecasting_iot_launcher=("18601-19000") #SAS Viya servers only
 
 # * SVI
 
 cas_comunicator=0 #SAS Viya Servers only
 sas_event_stream_manager=2552 #ESP servers only
-sas_infraestructure_data="5430–5439"
+sas_infraestructure_data=("5430–5439")
 default_sas_message_broker=5672
 svi_sas_config=("8300–8309" 8500 8501) # SAS Viya Servers only
 default_sas_message_broker=15672 # SAS Viya Servers only
-sas_model_manager_launcher_context="18201–18250" # SAS Viya Servers only
-sas_job_execution_launcher_context="18501–18600" # SAS Viya Servers only
-sas_visual_forecasting_launcher_context="18601–19000" # SAS Viya Servers only
-sas_cloud_analytics_services="19990-19999" # SAS Viya Servers only
+sas_model_manager_launcher_context=("18201–18250") # SAS Viya Servers only
+sas_job_execution_launcher_context=("18501–18600") # SAS Viya Servers only
+sas_visual_forecasting_launcher_context=("18601–19000") # SAS Viya Servers only
+sas_cloud_analytics_services=("19990-19999") # SAS Viya Servers only
 
 declare -A ARR
 if [ "$2" = "viya" ]
@@ -112,7 +112,7 @@ fi
 for key in ${!ARR[@]};
 do
     echo "$key"
-    echo "PORT ${ARR[${key}]}"
+    echo "${ARR[${key}]}"
     for i in ${ARR[${key}]}
     do
         echo "${i}"
