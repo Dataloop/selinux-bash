@@ -111,7 +111,8 @@ fi
 
 for key in ${!ARR[@]};
 do
-    echo "PORT $key ${ARR[${key}]}"
+    echo "$key"
+    echo "PORT ${ARR[${key}]}"
     for i in ${ARR[${key}]}
     do
         echo "${i}"
