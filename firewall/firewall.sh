@@ -15,7 +15,7 @@ if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
         svi: opens svi ports
         viya: opens viya ports
     "
-    exit 0
+    exit 126
 fi
 
 declare -A ARR
