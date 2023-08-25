@@ -5,11 +5,11 @@ then
     echo "Not enough arguments supplied. Use --help or -h for usage"
     return 126
 fi
-if [ "$1" = "-h" ] || [ "$1" = "--help" ]
+if [ "$1" = "-h" ] || [ "$1" = "--help" ] || [case "h" in *"$1"*]
 then
     echo "This script opens ports and checks if you can reach ports
 
-          check_ports.sh -<options> <parameter>
+          check_ports.sh -<options> parameter
 
           parameters:
             svi: opens svi ports
@@ -54,7 +54,7 @@ sas_visual_forecasting_launcher_context="18601–19000" # SAS Viya Servers only
 sas_cloud_analytics_services="19990-19999" # SAS Viya Servers only
 
 declare -A ARR
-if [ "$1" = "viya" ]
+if [ "$2" = "viya" ]
 then
     ARR["backup"]=${backup[@]}
     ARR["apache"]=${apache[@]}
@@ -76,7 +76,7 @@ then
     ARR["sas_model_iot_launcher"]=${sas_model_iot_launcher[@]}
     ARR["sas_job_launcher"]=${sas_job_launcher[@]}
     ARR["sas_forecasting_iot_launcher"]=${sas_forecasting_iot_launcher[@]}
-elif [ "$1" = "svi" ]
+elif [ "$2" = "svi" ]
 then
     ARR["apache"]=${apache[@]}
     ARR["epmd_port"]=${epmd_port[@]}
@@ -106,27 +106,9 @@ do
     echo "PORT $key ${ARR[${key}]}"
     for i in ${ARR[${key}]}
     do
-        while getopts "f:c" opt; do
-            case $opt in
-                f)
-                    firewall-cmd --add-port=$i/tcp
-                ;;
-                c)
-                    nc -v -z localhost  $i
-                ;;
-                \?)
-                    echo "Invalid option: -$OPTARG"
-                ;;
-            esac
-        done
-        
-        
+         firewall-cmd --add-port=$i/tcp
+         nc -v -z localhost  $i
     done
 done
-
-
-
-
-
 
 unset ARR
