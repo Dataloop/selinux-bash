@@ -9,9 +9,9 @@ if [ "$1" = "-h" ] || [ "$1" = "--help" ]
 then
     echo "This script opens ports and checks if you can reach ports
 
-          check_ports.sh <option>
+          check_ports.sh -<options> <parameter>
 
-          options:
+          parameters:
             svi: opens svi ports
             viya: opens viya ports
     "
@@ -106,9 +106,27 @@ do
     echo "PORT $key ${ARR[${key}]}"
     for i in ${ARR[${key}]}
     do
-         firewall-cmd --add-port=$i/tcp
-         nc -v -z localhost  $i
+        while getopts "a:v:c" opt; do
+            case $opt in
+                f)
+                    firewall-cmd --add-port=$i/tcp
+                ;;
+                c)
+                    nc -v -z localhost  $i
+                ;;
+                \?)
+                    echo "Invalid option: -$OPTARG"
+                ;;
+            esac
+        done
+        
+        
     done
 done
+
+
+
+
+
 
 unset ARR
