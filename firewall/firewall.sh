@@ -67,7 +67,6 @@ ARR["sas_job_launcher"]=${sas_job_launcher[@]}
 ARR["sas_forecasting_iot_launcher"]=${sas_forecasting_iot_launcher[@]}
 ARR["cas_server"]=${cas_server[@]}
 ARR["sas_studio"]=${sas_studio[@]}
-ARR["sas_config"]=${sas_config[@]}
 ARR["sas_spawner"]=${sas_spawner[@]}
 ARR["cas_monitor"]=${cas_monitor[@]}
 ARR["sas_conect_spawner_manager"]=${sas_conect_spawner_manager[@]}
