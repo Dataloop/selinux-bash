@@ -1,22 +1,24 @@
 #!/bin/bash
 re='^[0-9]+$'
-if [ $# -lt 1 ]
-then
+
+if [ $# -lt 1 ]; then
     echo "Not enough arguments supplied. Use --help or -h for usage"
-    return 126
+    exit 126
 fi
-if [ "$1" = "-h" ] || [ "$1" = "--help" ]
-then
+
+if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
     echo "This script opens ports and checks if you can reach ports
 
-          check_ports.sh -<options> <parameter>
+    check_ports.sh -<options> <parameter>
 
-          parameters:
-            svi: opens svi ports
-            viya: opens viya ports
+    parameters:
+        svi: opens svi ports
+        viya: opens viya ports
     "
-    return 0
+    exit 0
 fi
+
+declare -A ARR
 # * VIYA
 
 backup=7 #TCP protocol
@@ -96,37 +98,24 @@ then
     ARR["sas_job_execution_launcher_context"]=${sas_job_execution_launcher_context[@]}
     ARR["sas_visual_forecasting_launcher_context"]=${sas_visual_forecasting_launcher_context[@]}
     ARR["sas_cloud_analytics_services"]=${sas_cloud_analytics_services[@]}
-else
-    echo "Option not valid. Use --help or -h for usage"
-    return 1
-fi
 
-for key in ${!ARR[@]};
-do
+for key in ${!ARR[@]}; do
     echo "PORT $key ${ARR[${key}]}"
-    for i in ${ARR[${key}]}
-    do
-        while getopts "a:v:c" opt; do
+    for i in ${ARR[${key}]}; do
+        while getopts "fc" opt; do
             case $opt in
                 f)
                     firewall-cmd --add-port=$i/tcp
-                ;;
+                    ;;
                 c)
-                    nc -v -z localhost  $i
-                ;;
+                    nc -v -z localhost $i
+                    ;;
                 \?)
                     echo "Invalid option: -$OPTARG"
-                ;;
+                    ;;
             esac
         done
-        
-        
     done
 done
-
-
-
-
-
 
 unset ARR
