@@ -114,7 +114,7 @@ do
     echo "PORT $key ${ARR[${key}]}"
     for i in ${ARR[${key}]}
     do
-        echo "${1}"
+        echo "${i}"
         if [[ "$1" =~ .*"f".* ]]
         then
             sudo firewall-cmd --add-port=$i/tcp
