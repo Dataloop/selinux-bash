@@ -106,8 +106,8 @@ do
     echo "PORT $key ${ARR[${key}]}"
     for i in ${ARR[${key}]}
     do
-         firewall-cmd --add-port=$i/tcp
-         nc -v -z localhost  $i
+        sudo firewall-cmd --add-port=$i/tcp
+        nc -v -z localhost  $i
     done
 done
 
